@@ -1,0 +1,10 @@
+{
+  "name": "ionic-gulp-webpack-build",
+  "description": "Gulp task for Ionic projects to transpile and bundle JavaScript/TypeScript sources with webpack",
+  "version": "1.0.0",
+  "dependencies": {
+    "lodash.assign": "^4.0.6",
+    "q": "^1.4.1",
+    "webpack": "^1.12.14"
+  }
+}

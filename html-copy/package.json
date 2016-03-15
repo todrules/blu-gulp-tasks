@@ -1,0 +1,8 @@
+{
+  "name": "ionic-gulp-html-copy",
+  "description": "Gulp task for Ionic projects to copy HTML sources to a build directory",
+  "version": "1.0.0",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
