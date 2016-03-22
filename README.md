@@ -12,6 +12,7 @@ The current list of tasks is:
 - [Sass build task](./sass-build)
 - [Fonts copy task](./fonts-copy)
 - [HTML copy task](./html-copy)
+- [Scripts copy task](./scripts-copy)
 
 #### Usage
 
