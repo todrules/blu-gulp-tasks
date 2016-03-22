@@ -20,7 +20,7 @@ var copyFonts = require('ionic-gulp-fonts-copy');
 gulp.task('fonts', copyFonts);
 
 gulp.task('fonts', function(){
-  return copyFonts({ dest: 'www/my-custom-build-dir'});
+  return copyFonts({ dest: 'www/my-custom-build-dir' });
 });
 ```
 

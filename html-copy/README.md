@@ -20,7 +20,7 @@ var copyHTML = require('ionic-gulp-html-copy');
 gulp.task('html', copyHTML);
 
 gulp.task('html', function(){
-  return copyHTML({ dest: 'www/my-custom-build-dir'});
+  return copyHTML({ dest: 'www/my-custom-build-dir' });
 });
 ```
 
