@@ -1,4 +1,4 @@
-# Webpack Build Task
+# Webpack Task
 Use webpack to transpile and bundle your source files.
 
 You will need to provide a `webpack.config.js` file in your project root. For more information on webpack configuration, see https://webpack.github.io/docs/configuration.html.
@@ -26,7 +26,7 @@ Returns a Promise that resolves when the build is finished.
 ## Example
 
 ```
-var webpackBuild = require('ionic-gulp-webpack-build');
+var webpackBuild = require('ionic-gulp-webpack');
 
 gulp.task('build', webpackBuild);
 
