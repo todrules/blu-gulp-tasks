@@ -13,7 +13,7 @@ that can be [piped](http://nodejs.org/api/stream.html#stream_readable_pipe_desti
 - **src** (string|File|Array) String, file object, or array of those types (they may be mixed) specifying Browserify entry file(s). Default: `'./app/app.js'`.
 - **outputPath** (string) Output path for the bundle and sourcemaps. Default: `'www/build/js/'`.
 - **outputFile** (string) Name for the bundle. Default: `'app.bundle.js'`.
-- **browserifyOptions** (Object) [Browserify options](https://github.com/substack/node-browserify#browserifyfiles--opts). Default:
+- **browserifyOptions** (Object) [Browserify options](https://github.com/substack/node-browserify#browserifyfiles--opts). Defaults:
 ```
 {
   cache: {},
@@ -31,7 +31,9 @@ that can be [piped](http://nodejs.org/api/stream.html#stream_readable_pipe_desti
 ```
 
 ## Notes
-Setting `options.browserifyOptions.debug` to `false` will disable sourcemaps and drastically speed up your rebuilds when watching.
+If your npm version is 2 or below, it is recommended that you update to npm 3 to speed up the time it takes Babel to transpile your source files.
+
+Also, setting `options.browserifyOptions.debug` to `false` will disable sourcemaps and drastically speed up your rebuilds when watching.
 
 ## Example
 
@@ -41,7 +43,10 @@ var browserifyBuild = require('ionic-gulp-browserify-es2015');
 gulp.task('build', browserifyBuild);
 
 gulp.task('watch', function(){
-  return browserifyBuild({ watch: true });
+  return browserifyBuild({
+    watch: true,
+    browserifyOptions: { debug: false } //if you want to disable sourcemaps
+  });
 });
 ```
 
