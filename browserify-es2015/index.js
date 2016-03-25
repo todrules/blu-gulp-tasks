@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     watchify = require('watchify'),
     pretty = require('prettysize'),
-    assign = require('lodash.assign'),
+    assign = require('lodash.merge'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -37,7 +37,7 @@ module.exports = function(options) {
     .pipe(buffer)
     .pipe(sourcemaps.init, { loadMaps: true })
     .pipe(sourcemaps.write, './');
-    
+
   var b = browserify(options.src, options.browserifyOptions)
     .transform('babelify', options.babelifyOptions);
 
