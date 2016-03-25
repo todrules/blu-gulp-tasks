@@ -6,7 +6,9 @@ var gulp = require('gulp'),
     assign = require('lodash.assign'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    gulpif = require('gulp-if'),
+    lazypipe = require('lazypipe');
 
 var defaultOptions = {
   watch: false,
@@ -28,6 +30,11 @@ var defaultOptions = {
 
 module.exports = function(options) {
   var options = assign(defaultOptions, options);
+  var sourcemapPipe = lazypipe()
+    .pipe(buffer)
+    .pipe(sourcemaps.init, { loadMaps: true })
+    .pipe(sourcemaps.write, './');
+
   var b = browserify(options.src, options.browserifyOptions)
     .plugin(tsify, options.tsifyOptions);
 
@@ -43,9 +50,7 @@ module.exports = function(options) {
     return b.bundle()
       .on('error', options.onError)
       .pipe(source(options.outputFile))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write('./'))
+      .pipe(gulpif(options.browserifyOptions.debug, sourcemapPipe()))
       .pipe(gulp.dest(options.outputPath));
   }
 }

@@ -10,7 +10,9 @@
   "dependencies": {
     "browserify": "^13.0.0",
     "gulp": "^3.9.1",
+    "gulp-if": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
+    "lazypipe": "^1.0.1",
     "lodash.assign": "^4.0.6",
     "prettysize": "0.0.3",
     "tsify": "^0.14.1",
