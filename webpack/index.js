@@ -17,7 +17,12 @@ var defaultOptions = {
 module.exports = function(options) {
   var deferred = Q.defer();
   options = assign(defaultOptions, options);
-  options.config = options.config || require(process.cwd() + '/webpack.config.js');
+  try {
+    options.config = options.config || require(process.cwd() + '/webpack.config.js');
+  } catch(e) {
+      console.error('There was an error loading your webpack.config file:', e);
+      return
+  }
 
   function webpackCallback(err, stats) {
     // print build stats and errors
