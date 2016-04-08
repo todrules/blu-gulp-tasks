@@ -1,4 +1,7 @@
 var gulp = require('gulp'),
+    babelify = require('babelify'),
+    babelDecoratorsTransform = require('babel-plugin-transform-decorators-legacy').default,
+    babelES2015Preset = require('babel-preset-es2015'),
     browserify = require('browserify'),
     watchify = require('watchify'),
     pretty = require('prettysize'),
@@ -22,8 +25,8 @@ var defaultOptions = {
   },
   watchifyOptions: {},
   babelifyOptions: {
-    presets: ['es2015'],
-    plugins: ['transform-decorators-legacy']
+    presets: [babelES2015Preset],
+    plugins: [babelDecoratorsTransform]
   },
   onError: function(err){ console.error(err.toString()); },
   onLog: function(log){
@@ -39,7 +42,7 @@ module.exports = function(options) {
     .pipe(sourcemaps.write, './');
 
   var b = browserify(options.src, options.browserifyOptions)
-    .transform('babelify', options.babelifyOptions);
+    .transform(babelify, options.babelifyOptions);
 
   if (options.watch) {
     b = watchify(b, options.watchifyOptions);
