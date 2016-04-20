@@ -45,7 +45,7 @@ module.exports = function(options) {
 
   var sourcemapPipe = lazypipe()
     .pipe(sourcemaps.init, { loadMaps: true })
-      .pipe(function(){ return gulpif(options.minify, uglify(options.uglifyOptions)) });
+      .pipe(function(){ return gulpif(options.minify, uglify(options.uglifyOptions)) })
     .pipe(sourcemaps.write, './');
 
   var b = browserify(options.src, options.browserifyOptions)
