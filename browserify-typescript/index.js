@@ -51,17 +51,15 @@ module.exports = function(options) {
       .pipe(source(options.outputFile))
       .pipe(buffer());
     
-    // NOTE: There are intentionally no scope blocks -
-    //       the commands should be run in this order.
-    if (options.browserifyOptions.debug) result = result.pipe(
-      sourcemaps.init({ loadMaps: true })
-    );
-    if (options.minify) result = result.pipe(
-      uglify(options.uglifyOptions)
-    );
-    if (options.browserifyOptions.debug) result = result.pipe(
-      sourcemaps.write('./')
-    );
+    if (options.browserifyOptions.debug) {
+      result = result.pipe(sourcemaps.init({ loadMaps: true }));
+    }
+    if (options.minify) {
+      result = result.pipe(uglify(options.uglifyOptions));
+    }
+    if (options.browserifyOptions.debug) {
+      result = result.pipe(sourcemaps.write('./'));
+    }
     
     return result.pipe(gulp.dest(options.outputPath));
   }
