@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 var defaultSrc = [
   'node_modules/es6-shim/es6-shim.min.js',
-  'node_modules/angular2/bundles/angular2-polyfills.js'
+  'node_modules/angular2/bundles/angular2-polyfills.min.js'
 ];
 
 module.exports = function(options) {
