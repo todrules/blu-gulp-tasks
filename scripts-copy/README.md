@@ -15,7 +15,7 @@ that can be [piped](http://nodejs.org/api/stream.html#stream_readable_pipe_desti
   'node_modules/es6-shim/es6-shim.min.js',
   'node_modules/angular2/bundles/angular2-polyfills.js'
 ]
-```.
+```
 - **dest** (String) Output path for the HTML files. Default: `'www/build/js'`.
 
 ## Example
