@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     watchify = require('watchify'),
     tsify = require('tsify'),
     pretty = require('prettysize'),
-    assign = require('lodash.merge'),
+    merge = require('lodash.merge'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -33,7 +33,7 @@ var defaultOptions = {
 }
 
 module.exports = function(options) {
-  var options = assign(defaultOptions, options);
+  var options = merge(defaultOptions, options);
 
   var b = browserify(options.src, options.browserifyOptions)
     .plugin(tsify, options.tsifyOptions);
