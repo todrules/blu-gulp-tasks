@@ -9,9 +9,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    gulpif = require('gulp-if'),
-    lazypipe = require('lazypipe'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    stream = require('stream');
 
 
 var defaultOptions = {
@@ -31,7 +30,9 @@ var defaultOptions = {
     plugins: [babelDecoratorsTransform]
   },
   uglifyOptions: {},
-  onError: function(err){ console.error(err.toString()); },
+  onError: function(err){
+    console.error(err.toString());
+  },
   onLog: function(log){
     console.log((log = log.split(' '), log[0] = pretty(log[0]), log.join(' ')));
   }
@@ -39,14 +40,6 @@ var defaultOptions = {
 
 module.exports = function(options) {
   var options = assign(defaultOptions, options);
-
-  var noSourcemapPipe = lazypipe()
-    .pipe(function(){ return gulpif(options.minify, uglify(options.uglifyOptions)) });
-
-  var sourcemapPipe = lazypipe()
-    .pipe(sourcemaps.init, { loadMaps: true })
-      .pipe(function(){ return gulpif(options.minify, uglify(options.uglifyOptions)) })
-    .pipe(sourcemaps.write, './');
 
   var b = browserify(options.src, options.browserifyOptions)
     .transform(babelify, options.babelifyOptions);
@@ -60,13 +53,18 @@ module.exports = function(options) {
   return bundle();
 
   function bundle() {
+    var debug = options.browserifyOptions.debug;
     return b.bundle()
       .on('error', options.onError)
       .pipe(source(options.outputFile))
       .pipe(buffer())
-      .pipe(gulpif(options.browserifyOptions.debug, sourcemapPipe()))
-      .pipe(gulpif(!options.browserifyOptions.debug, noSourcemapPipe()))
+      .pipe(debug ? sourcemaps.init({ loadMaps: true }) : noop())
+      .pipe(options.minify ? uglify(options.uglifyOptions) : noop())
+      .pipe(debug ? sourcemaps.write('./') : noop())
       .pipe(gulp.dest(options.outputPath));
   }
-}
 
+  function noop(){
+    return new stream.PassThrough({ objectMode: true });
+  }
+}

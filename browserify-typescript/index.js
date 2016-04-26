@@ -58,7 +58,6 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.outputPath));
   }
 
-  // Do nothing
   function noop(){
     return new stream.PassThrough({ objectMode: true });
   }
