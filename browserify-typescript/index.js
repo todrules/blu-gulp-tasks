@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    stream = require('stream');
 
 var defaultOptions = {
   watch: false,
@@ -46,21 +47,19 @@ module.exports = function(options) {
   return bundle();
 
   function bundle() {
-    var result = b.bundle()
+    var debug = options.browserifyOptions.debug;
+    return b.bundle()
       .on('error', options.onError)
       .pipe(source(options.outputFile))
-      .pipe(buffer());
-    
-    if (options.browserifyOptions.debug) {
-      result = result.pipe(sourcemaps.init({ loadMaps: true }));
-    }
-    if (options.minify) {
-      result = result.pipe(uglify(options.uglifyOptions));
-    }
-    if (options.browserifyOptions.debug) {
-      result = result.pipe(sourcemaps.write('./'));
-    }
-    
-    return result.pipe(gulp.dest(options.outputPath));
+      .pipe(buffer())
+      .pipe(debug ? sourcemaps.init({ loadMaps: true }) : noop())
+      .pipe(options.minify ? uglify(options.uglifyOptions) : noop())
+      .pipe(debug ? sourcemaps.write('./') : noop())
+      .pipe(gulp.dest(options.outputPath));
+  }
+
+  // Do nothing
+  function noop(){
+    return new stream.PassThrough({ objectMode: true });
   }
 }
