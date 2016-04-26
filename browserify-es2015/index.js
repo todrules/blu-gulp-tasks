@@ -9,8 +9,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    gulpif = require('gulp-if'),
-    lazypipe = require('lazypipe');
+    uglify = require('gulp-uglify'),
+    stream = require('stream');
 
 
 var defaultOptions = {
@@ -18,6 +18,7 @@ var defaultOptions = {
   src: './app/app.js',
   outputPath: 'www/build/js/',
   outputFile: 'app.bundle.js',
+  minify: false,
   browserifyOptions: {
     cache: {},
     packageCache: {},
@@ -28,7 +29,10 @@ var defaultOptions = {
     presets: [babelES2015Preset],
     plugins: [babelDecoratorsTransform]
   },
-  onError: function(err){ console.error(err.toString()); },
+  uglifyOptions: {},
+  onError: function(err){
+    console.error(err.toString());
+  },
   onLog: function(log){
     console.log((log = log.split(' '), log[0] = pretty(log[0]), log.join(' ')));
   }
@@ -36,10 +40,6 @@ var defaultOptions = {
 
 module.exports = function(options) {
   var options = assign(defaultOptions, options);
-  var sourcemapPipe = lazypipe()
-    .pipe(buffer)
-    .pipe(sourcemaps.init, { loadMaps: true })
-    .pipe(sourcemaps.write, './');
 
   var b = browserify(options.src, options.browserifyOptions)
     .transform(babelify, options.babelifyOptions);
@@ -53,11 +53,18 @@ module.exports = function(options) {
   return bundle();
 
   function bundle() {
+    var debug = options.browserifyOptions.debug;
     return b.bundle()
       .on('error', options.onError)
       .pipe(source(options.outputFile))
-      .pipe(gulpif(options.browserifyOptions.debug, sourcemapPipe()))
+      .pipe(buffer())
+      .pipe(debug ? sourcemaps.init({ loadMaps: true }) : noop())
+      .pipe(options.minify ? uglify(options.uglifyOptions) : noop())
+      .pipe(debug ? sourcemaps.write('./') : noop())
       .pipe(gulp.dest(options.outputPath));
   }
-}
 
+  function noop(){
+    return new stream.PassThrough({ objectMode: true });
+  }
+}
