@@ -1,7 +1,7 @@
 {
   "name": "ionic-gulp-browserify-es2015",
   "description": "Gulp task for Ionic projects to transpile and bundle ES2015 sources with Browserify",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
