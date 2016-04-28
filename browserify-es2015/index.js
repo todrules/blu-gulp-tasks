@@ -32,6 +32,7 @@ var defaultOptions = {
   uglifyOptions: {},
   onError: function(err){
     console.error(err.toString());
+    this.emit('end');
   },
   onLog: function(log){
     console.log((log = log.split(' '), log[0] = pretty(log[0]), log.join(' ')));
