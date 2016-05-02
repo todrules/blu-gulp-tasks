@@ -7,12 +7,13 @@ You will need to provide a `webpack.config.js` file in your project root. For mo
 
 ### webpackBuild([options])
 
-Returns a Promise that resolves when the build is finished.
+Returns a Promise that resolves when the build is finished if there are no errors, and rejects if there are build errors. Use the `failOnWarning` option to also reject when there are build warnings.
 
 #### Available options:
 - **watch** (boolean) Whether to watch for changes or not. Default: `false`.
 - **watchOptions** (Object) [Watch options](https://webpack.github.io/docs/node.js-api.html#compiler) for webpack. Default: `null`.
 - **config** (Object) [Configuration](https://webpack.github.io/docs/configuration.html) for webpack. Default: uses `webpack.config.js` from your project root.
+- **failOnWarning** (boolean) Whether to reject on warning or not. Default: `false`.
 - **statsOptions** (Object) [Stats options](https://webpack.github.io/docs/node.js-api.html#stats-tostring) for webpack. Default:
 ```
 {

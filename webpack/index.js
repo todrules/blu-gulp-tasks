@@ -28,11 +28,11 @@ module.exports = function(options) {
   function webpackCallback(err, stats) {
     // print build stats and errors
     console.log(stats.toString(options.statsOptions));
-    if (stats.hasErrors() || 
+    if (stats.hasErrors() ||
       (stats.hasWarnings() && options.failOnWarning)) {
       deferred.reject(err);
     }
-    
+
     deferred.resolve();
   }
 
