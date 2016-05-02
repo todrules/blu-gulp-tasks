@@ -1,7 +1,7 @@
 {
   "name": "ionic-gulp-webpack",
   "description": "Gulp task for Ionic projects to transpile and bundle JavaScript/TypeScript sources with webpack",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
