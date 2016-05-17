@@ -14,6 +14,7 @@ The current list of tasks is:
 - [Fonts copy task](./fonts-copy)
 - [HTML copy task](./html-copy)
 - [Scripts copy task](./scripts-copy)
+- [TSLint task](./lint-typescript)
 - [*ESlint task](https://github.com/devillex/ionic-gulp-eslint)
 
 
