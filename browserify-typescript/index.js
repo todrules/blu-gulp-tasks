@@ -55,7 +55,7 @@ module.exports = function(options) {
       .pipe(buffer())
       .pipe(debug ? sourcemaps.init({ loadMaps: true }) : noop())
       .pipe(options.minify ? uglify(options.uglifyOptions) : noop())
-      .pipe(debug ? sourcemaps.write('./',{includeContent:false, sourceRoot:'../../../'}) : noop())
+      .pipe(debug ? sourcemaps.write('./',{includeContent:true, sourceRoot:'../../../'}) : noop())
       .pipe(gulp.dest(options.outputPath));
   }
 
