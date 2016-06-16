@@ -34,7 +34,7 @@ var defaultOptions = {
 }
 
 module.exports = function(options) {
-  var options = merge(defaultOptions, options);
+  options = merge(defaultOptions, options);
 
   var b = browserify(options.src, options.browserifyOptions)
     .plugin(tsify, options.tsifyOptions);
