@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
 var defaultOptions = {
   watch: false,
-  src: ['./app/app.ts', './typings/index.d.ts'],
+  src: ['./app/app.ts', './typings/index.d.ts', './node_modules/@types/node-uuid/index.d.ts'],
   outputPath: 'www/build/js/',
   outputFile: 'app.bundle.js',
   minify: false,
@@ -22,7 +22,9 @@ var defaultOptions = {
     debug: true
   },
   watchifyOptions: {},
-  tsifyOptions: {},
+  tsifyOptions: {
+    typescript: require('typescript')
+  },
   uglifyOptions: {},
   onError: function(err){
     console.error(err.toString());
