@@ -32,7 +32,7 @@ var defaultOptions = {
 
 module.exports = function(options) {
   options = assign(defaultOptions, options);
-
+  var debug = options.debug;
   return gulp.src(options.src)
     .pipe(debug ? sourcemaps.init() : noop())
     .pipe(sass(options.sassOptions))
