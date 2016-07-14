@@ -13,8 +13,10 @@ that can be [piped](http://nodejs.org/api/stream.html#stream_readable_pipe_desti
 ```
 [
   'node_modules/es6-shim/es6-shim.min.js',
+  'node_modules/es6-shim/es6-shim.map',
   'node_modules/zone.js/dist/zone.js',
-  'node_modules/reflect-metadata/Reflect.js'
+  'node_modules/reflect-metadata/Reflect.js',
+  'node_modules/reflect-metadata/Reflect.js.map'
 ]
 ```
 - **dest** (String) Output path for the HTML files. Default: `'www/build/js'`.
