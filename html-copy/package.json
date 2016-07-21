@@ -1,10 +1,10 @@
 {
-  "name": "ionic-gulp-html-copy",
+  "name": "blu-gulp-html-copy",
   "description": "Gulp task for Ionic projects to copy HTML sources to a build directory",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/driftyco/ionic-gulp-tasks.git"
+    "url": "https://github.com/todrules/blu-gulp-tasks.git"
   },
   "version": "1.0.0",
   "dependencies": {
