@@ -1,11 +1,11 @@
 {
-  "name": "ionic-gulp-browserify-typescript",
+  "name": "blu-gulp-browserify-typescript",
   "description": "Gulp task for Ionic projects to transpile and bundle TypeScript sources with Browserify",
   "version": "2.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/driftyco/ionic-gulp-tasks.git"
+    "url": "https://github.com/todrules/blu-gulp-tasks.git"
   },
   "dependencies": {
     "browserify": "^13.0.0",
